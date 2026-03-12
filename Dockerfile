@@ -3,7 +3,11 @@ FROM dunglas/frankenphp:php8.2-bookworm
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
-    git curl zip unzip nodejs npm
+    git curl zip unzip ca-certificates gnupg
+
+# Install Node 20
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
 
 RUN install-php-extensions \
     pdo_mysql mbstring openssl tokenizer \
