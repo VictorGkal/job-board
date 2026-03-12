@@ -17,6 +17,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 COPY . .
 
+# Copy Caddyfile to root
+COPY Caddyfile /Caddyfile
+
 RUN composer install --no-dev --optimize-autoloader
 
 RUN npm install && npm run build
@@ -33,5 +36,5 @@ CMD php artisan config:clear \
     && php artisan view:cache \
     && php artisan migrate --force \
     && php artisan db:seed --force \
-    && php artisan storage:link \
+    && php artisan storage:link --force \
     && frankenphp run --config /Caddyfile
