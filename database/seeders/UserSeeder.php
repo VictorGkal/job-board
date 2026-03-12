@@ -9,14 +9,14 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::create([
+        User::firstOrCreate([
             'name' => 'Test Employer',
             'email' => 'employer@test.com',
             'password' => bcrypt('password123'),
             'role' => 'employer',
         ]);
 
-        User::create([
+        User::firstOrCreate([
             'name' => 'Test Candidate',
             'email' => 'candidate@test.com',
             'password' => bcrypt('password123'),
